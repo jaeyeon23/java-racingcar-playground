@@ -38,4 +38,11 @@ public class Car {
             winnerList.add(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "name=" + name +
+                '}';
+    }
 }

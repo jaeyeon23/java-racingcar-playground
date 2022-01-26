@@ -17,6 +17,8 @@ public class RacingTest {
         // when
         List<Car> winnerList = racing.play();
         // then
-        System.out.println(winnerList);
+        for (Car car : winnerList) {
+            System.out.println(car.toString());
+        }
     }
 }
