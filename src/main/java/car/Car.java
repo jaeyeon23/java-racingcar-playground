@@ -1,33 +1,41 @@
 package car;
 
-import java.util.Random;
+import java.util.List;
 
 public class Car {
-    private static final int FORWARD_NUM = 4;
-    private static final int MAX_BOUND = 10;
+    private Name name;
+    private Position position;
 
-    private String name;
-    private int position;
+    public Car(Name name) {
+        this.name = name;
+        this.position = new Position();
+    }
 
-    public Car(String name) {
-        ValidationUtil validationUtil = new ValidationUtil();
-        if (validationUtil.isLength(name)) {
-            this.name = name;
+    public Car(Name name, int position) {
+        this.name = name;
+        this.position = new Position(position);
+    }
+
+    public void move(int randomNum) {
+        if (randomNum >= 4) {
+            position.move();
         }
     }
 
-    public void move() {
-        if (getRandomNum() >= FORWARD_NUM) {
-            this.position++;
-        }
-    }
-
-    public int getRandomNum() {
-        Random random = new Random();
-        return random.nextInt(MAX_BOUND);
-    }
-
-    public int getPosition() {
+    public Position getPosition() {
         return position;
+    }
+
+    public int getMaxPosition(int maxNumber) {
+        if (position.getPositionNum() > maxNumber) {
+            return position.getPositionNum();
+        }
+        return maxNumber;
+    }
+
+    public void isWinner(List<Car> winnerList, int maxNumber) {
+        if (position.getPositionNum() == maxNumber) {
+            winnerList.add(this);
+        }
     }
 }
