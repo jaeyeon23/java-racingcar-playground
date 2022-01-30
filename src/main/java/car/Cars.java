@@ -1,37 +1,27 @@
 package car;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cars {
-    private List<Car> cars;
+    private List<Car> carList;
 
-    public Cars(List<Car> cars) {
-        this.cars = cars;
+    public Cars(List<Car> carList) {
+        this.carList = carList;
     }
 
-    public List<Car> pickWinner() {
-        int maxNumber = getMaxNum();
-        List<Car> winnerList = new ArrayList<>();
-        return getWinnerList(winnerList, maxNumber);
+    public List<Car> pickWinners() throws NoSuchFieldException {
+        int maxPosition = getMaxPosition();
+        return carList.stream()
+                .filter(car -> car.getPosition() == maxPosition)
+                .collect(Collectors.toList());
     }
 
-    private List<Car> getWinnerList(List<Car> winnerList, int maxNumber) {
-        for (Car car : cars) {
-            car.isWinner(winnerList, maxNumber);
-        }
-        return winnerList;
-    }
-
-    private int getMaxNum() {
-        int maxNumber = 0;
-        for (Car car : cars) {
-            maxNumber = car.getMaxPosition(maxNumber);
-        }
-        return maxNumber;
-    }
-
-    public List<Car> getCars() {
-        return cars;
+    private int getMaxPosition() throws NoSuchFieldException {
+        return carList.stream()
+                .max(Comparator.comparing(Car::getPosition))
+                .orElseThrow(NoSuchFieldException::new)
+                .getPosition();
     }
 }

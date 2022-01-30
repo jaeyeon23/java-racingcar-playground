@@ -5,20 +5,18 @@ import java.util.Objects;
 public class Position {
     private int position;
 
-    public Position() {
-        this(0);
-    }
-
     public Position(int position) {
+        if (position < 1) {
+            throw new IllegalArgumentException("0이하의 position은 존재할 수 없습니다.");
+        }
         this.position = position;
     }
 
-    public Position move() {
-        this.position += 1;
-        return this;
+    public void addPosition() {
+        position++;
     }
 
-    public int getPositionNum() {
+    public int getPosition() {
         return position;
     }
 
