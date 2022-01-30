@@ -7,19 +7,19 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class CarsTest {
     @Test
-    void pickWinner() {
+    void play() throws Exception {
         // given
-        Car steve = new Car(new Name("Steve"), 2);
-        Car tom = new Car(new Name("Tom"), 3);
-        Car eric = new Car(new Name("Eric"), 4);
-        List<Car> carList = Arrays.asList(steve, tom, eric);
-        Cars cars = new Cars(carList);
+        Car steve = new Car(new Name("Steve"), new Position(3));
+        Car tom = new Car(new Name("Tom"), new Position(5));
+        Car terry = new Car(new Name("Terry"), new Position(5));
+        Cars cars = new Cars(Arrays.asList(steve, tom, terry));
+
         // when
-        List<Car> winnerList = cars.pickWinner();
+        List<Car> winners = cars.pickWinners();
+
         // then
-        assertThat(winnerList).containsExactly(eric);
+        assertThat(winners).containsExactlyInAnyOrder(terry, tom);
     }
 }

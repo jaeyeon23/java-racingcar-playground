@@ -2,16 +2,13 @@ package car;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CarTest {
     @Test
     void move() {
-        // given
-        Car car = new Car(new Name("Steve"));
-        // when
+        Car car = new Car(new Name("Tom"), new Position(3));
         car.move(4);
-        // then
-        assertThat(car.getPosition()).isEqualTo(new Position(1));
+        assertThat(car.getPosition()).isEqualTo(new Position(4));
     }
 }

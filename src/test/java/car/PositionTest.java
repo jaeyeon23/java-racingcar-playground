@@ -2,24 +2,20 @@ package car;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class PositionTest {
     @Test
     void create() {
-        // given
-        Position position = new Position(0);
-        // then
-        assertThat(position).isEqualTo(new Position());
+        Position position = new Position(1);
+        assertThat(position).isEqualTo(new Position(1));
     }
 
     @Test
-    void move() {
-        // given
-        Position position = new Position(0);
-        // when
-        position.move();
-        // then
-        assertThat(position).isEqualTo(new Position(1));
+    void valid() {
+        assertThatThrownBy(() -> {
+            new Position(0);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 }

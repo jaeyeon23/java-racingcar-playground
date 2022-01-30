@@ -1,48 +1,21 @@
 package car;
 
-import java.util.List;
-
 public class Car {
-    private Name name;
+    private final Name name;
     private Position position;
 
-    public Car(Name name) {
+    public Car(Name name, Position position) {
         this.name = name;
-        this.position = new Position();
-    }
-
-    public Car(Name name, int position) {
-        this.name = name;
-        this.position = new Position(position);
+        this.position = position;
     }
 
     public void move(int randomNum) {
         if (randomNum >= 4) {
-            position.move();
+            position.addPosition();
         }
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public int getMaxPosition(int maxNumber) {
-        if (position.getPositionNum() > maxNumber) {
-            return position.getPositionNum();
-        }
-        return maxNumber;
-    }
-
-    public void isWinner(List<Car> winnerList, int maxNumber) {
-        if (position.getPositionNum() == maxNumber) {
-            winnerList.add(this);
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "name=" + name +
-                '}';
+    public int getPosition() {
+        return position.getPosition();
     }
 }
